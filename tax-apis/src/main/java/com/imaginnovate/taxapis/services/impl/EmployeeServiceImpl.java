@@ -37,11 +37,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         );
 
         //Assuming that tax calculation for 2022-2023 financial year
-        LocalDate startDate = LocalDate.of(2022,4,1);
+        LocalDate startDate = LocalDate.of(2022,3,31);
         LocalDate endDate = LocalDate.of(2023,3,31);
         LocalDate doj = employee.getDoj();
 
-        int monthsWorked = Period.between(doj,endDate).getMonths();
+        int monthsWorked = Period.between(doj,endDate).getMonths() + 1;
         System.out.println(monthsWorked);
         int lop = Period.between(startDate,doj).getDays();
         System.out.println(lop);
@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Double yearlySalary,tax = 0d;
 
-        yearlySalary = monthlySalary*monthsWorked + lop*daySalary;
+        yearlySalary = monthlySalary*monthsWorked - lop*daySalary;
 
         if(yearlySalary > 1000000){
             tax = 200000+(yearlySalary-1000000)*0.2;
