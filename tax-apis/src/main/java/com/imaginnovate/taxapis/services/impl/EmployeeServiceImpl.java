@@ -41,17 +41,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         LocalDate endDate = LocalDate.of(2023,3,31);
         LocalDate doj = employee.getDoj();
 
+        //getting months from end of year from date of joining
         int monthsWorked = Period.between(doj,endDate).getMonths() + 1;
         System.out.println(monthsWorked);
+        //getting lop days between year start to date of joining
         int lop = Period.between(startDate,doj).getDays();
         System.out.println(lop);
 
+        //monthly salary from employee
         Double monthlySalary = employee.getSalary();
         Double daySalary = monthlySalary/30;
 
 
         Double yearlySalary,tax = 0d;
 
+        //calculating yearly salry based on no of working months and deducting lops
         yearlySalary = monthlySalary*monthsWorked - lop*daySalary;
 
         if(yearlySalary > 1000000){
