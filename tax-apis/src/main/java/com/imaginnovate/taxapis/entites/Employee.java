@@ -27,7 +27,7 @@ public class Employee {
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
-    private Long mobile;
+    private String mobile;
     @Column(nullable = false)
     private Double salary;
     @Column(nullable = false)

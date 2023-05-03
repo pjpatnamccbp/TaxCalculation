@@ -1,13 +1,12 @@
 package com.imaginnovate.taxapis.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,10 +19,10 @@ public class EmployeeDto {
 
     private Long employeeId;
 
-    @NotNull(message = "must required")
+    @NotNull(message = "firstName required")
     @Size(min = 3,message = "firstName should be min 3 letters")
     private String firstName;
-    @NotNull(message = "must required")
+    @NotNull(message = "lastName required")
     @Size(min = 3,message = "lastName should be min 3 letters")
     private String lastName;
 
@@ -31,13 +30,17 @@ public class EmployeeDto {
     @Email(message = "Enter valid email id")
     private String email;
 
-    //@NotEmpty(message = "mobile number mandatory")
-    private Long mobile;
+    @NotNull(message = "mobile number mandatory")
+    @Size(min = 10)
+    private String mobile;
 
-    //@NotEmpty(message = "salary mandatory")
+    @NotNull(message = "salary mandatory")
+    @Positive(message = "Salary Should be Positive only")
     private Double salary;
 
-    @NotNull(message = "Date of joining mandatory")
+    //@NotNull(message = "Date of joining mandatory")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate doj;
 
 }
